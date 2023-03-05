@@ -1,0 +1,44 @@
+{
+    "planets": [
+        {
+            "name": "Earth",
+            "text": "Earth is the third planet from the Sun and the only known planet with life. It has a solid iron inner core, a liquid outer core that generates its magnetic field, and a convective mantle that drives plate tectonics.",
+            "fun-fact": "The Earth is the only planet known to have liquid water on its surface, which is essential for life as we know it."
+        },
+        {
+            "name": "Jupiter",
+            "text": "Jupiter is the largest planet in the Solar System, fifth from the Sun, and is named after the Roman king of the gods. With a mass more than two and a half times that of all other planets combined, it is also the third-brightest natural object in the Earth's night sky.",
+            "fun-fact": "Jupiter has at least 79 moons, the four largest of which are called the Galilean moons and were first observed by Galileo Galilei in 1610."
+        },
+        {
+            "name": "Mars",
+            "text": "Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System. It is often referred to as the 'Red Planet' due to the iron oxide prevalent on its surface, which gives it a distinctive reddish appearance.",
+            "fun-fact": "Mars is home to the tallest mountain in the solar system, Olympus Mons, which is three times the height of Mount Everest!"
+        },
+        {
+            "name": "Mercury",
+            "text": "Mercury is the smallest planet in the Solar System, named after the Roman god Mercurius. It has a short orbit of 87.97 Earth days and can only be seen near the horizon at twilight, showing phases similar to Venus and the Moon.",
+            "fun-fact": "Despite being the closest planet to the Sun, Mercury is not the hottest planet in the Solar System. That title goes to Venus, which has a thick atmosphere that traps heat, making it hotter than Mercury."
+        },
+        {
+            "name": "Neptune",
+            "text": "Neptune is the farthest-known Solar planet from the Sun, and it is the fourth-largest and third-most-massive planet in the Solar System. It is named after the Roman god of the sea, and it has a symbol ♆ that represents the god Neptune's trident.",
+            "fun-fact": "Neptune is the only planet in the Solar System that was discovered through mathematical prediction rather than empirical observation. Its discovery was the result of irregularities observed in the orbit of Uranus, which led astronomers to predict the existence of an eighth planet."
+        },
+        {
+            "name": "Saturn",
+            "text": "Saturn, the sixth planet from the Sun, is the second-largest planet in the Solar System and is a gas giant with an average radius almost 10 times that of Earth. Its astronomical symbol is a Greek kappa-rho with a cross-bar, which evolved from the earlier symbol representing the Greek god Cronus.",
+            "fun-fact": "Saturn's most recognizable feature is its prominent ring system, which is made up of nine continuous main rings and three discontinuous arcs. The rings are composed of millions of individual particles, ranging in size from tiny grains of dust to large boulders."
+        },
+        {
+            "name": "Uranus",
+            "text": "Uranus is the seventh planet from the Sun, and is classified as an 'ice giant' due to its bulk chemical composition. It has the coldest planetary atmosphere in the Solar System, and its interior is mainly composed of ices and rock.",
+            "fun-fact": "Uranus is the only planet in the solar system whose equator is nearly at a right angle to its orbit, meaning it essentially orbits on its side. This gives it a very unique appearance and rotation."
+        },
+        {
+            "name": "Venus",
+            "text": "Venus, named after the Roman goddess of love and beauty, is the second planet from the Sun and the brightest natural object in Earth's night sky after the Moon. Its synodic day length is 117 Earth days, it rotates in the opposite direction to most planets, and it has no moons.",
+            "fun-fact": "Venus has the longest rotation period of any planet in the Solar System, taking 243 Earth days to complete a single rotation. Additionally, Venus rotates in the opposite direction to most planets, with the Sun rising in the west and setting in the east."
+        }
+    ]
+}
