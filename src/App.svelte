@@ -11,7 +11,7 @@
   import atmosphereVertexShader from "./shaders/atmosphereVertex.glsl";
   import atmoosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
 
-  import globeTexture from "./assets/planets/textures/globe.jpg";
+  import earthTexture from "./assets/planets/textures/globe.jpg";
   import jupiterTexture from "./assets/planets/textures/jupiter.jpg";
   import marsTexture from "./assets/planets/textures/mars.jpg";
   import mercuryTexture from "./assets/planets/textures/mercury.jpg";
@@ -27,8 +27,8 @@
   let currentPlanet;
 
   onMount(() => {
-    currentPlanet = planets.find((planet) => planet.name === "Earth");
     createPlanetScene();
+    currentPlanet = planets.find((planet) => planet.name === "Earth");
   });
 
   function createPlanetScene() {
@@ -48,180 +48,144 @@
     renderer.setSize(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
 
-    // create merkur
-    const merkur = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 50, 50),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(mercuryTexture),
-          },
-        },
-      })
-    );
-    merkur.position.y += 40;
-    scene.add(merkur);
+    createStarField(scene);
 
-    // create venus
-    const venus = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 50, 50),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(venusTexture),
-          },
-        },
-      })
-    );
-    venus.position.y += 20;
-    scene.add(venus);
+    planets.forEach((planet) => {
+      let targetTexture;
 
-    // create earth
-    const earth = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 50, 50),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(globeTexture),
+      switch (planet.name) {
+        case "Earth":
+          targetTexture = earthTexture;
+          break;
+        case "Jupiter":
+          targetTexture = jupiterTexture;
+          break;
+        case "Mars":
+          targetTexture = marsTexture;
+          break;
+        case "Mercury":
+          targetTexture = mercuryTexture;
+          break;
+        case "Neptune":
+          targetTexture = neptuneTexture;
+          break;
+        case "Saturn":
+          targetTexture = saturnTexture;
+          break;
+        case "Uranus":
+          targetTexture = uranusTexture;
+          break;
+        case "Venus":
+          targetTexture = venusTexture;
+          break;
+      }
+
+      planet.mesh = new THREE.Mesh(
+        new THREE.SphereGeometry(5, 50, 50),
+        new THREE.ShaderMaterial({
+          vertexShader,
+          fragmentShader,
+          uniforms: {
+            globeTexture: {
+              value: new THREE.TextureLoader().load(targetTexture),
+            },
           },
-        },
-      })
-    );
+        })
+      );
+
+      //Earth is default
+      if (planet.name != "Earth") {
+        planet.mesh.position.y += 20;
+      }
+
+      scene.add(planet.mesh);
+    });
 
     //Moon Orbit
     //todo transparent
-    const moonOrbit = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 35, 35),
-      new THREE.MeshBasicMaterial()
-    );
-    //moonOrbit.rotation.set(0,4,0);
-    moonOrbit.rotation.set(1, 4, 0);
-    moonOrbit.scale.set(0.9, 0.9, 0.9);
+    // const moonOrbit = new THREE.Mesh(
+    //   new THREE.SphereGeometry(5, 35, 35),
+    //   new THREE.MeshBasicMaterial()
+    // );
+    // //moonOrbit.rotation.set(0,4,0);
+    // moonOrbit.rotation.set(1, 4, 0);
+    // moonOrbit.scale.set(0.9, 0.9, 0.9);
 
-    const group = new THREE.Group();
-    group.add(moonOrbit);
-    group.add(earth);
-    scene.add(group);
+    // const group = new THREE.Group();
+    // group.add(moonOrbit);
+    // group.add(earth);
+    // scene.add(group);
 
     // create atmosphere
-    const atmosphere = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 50, 50),
-      new THREE.ShaderMaterial({
-        vertexShader: atmosphereVertexShader,
-        fragmentShader: atmoosphereFragmentShader,
-        blending: THREE.AdditiveBlending,
-        side: THREE.BackSide,
-      })
-    );
+    // const atmosphere = new THREE.Mesh(
+    //   new THREE.SphereGeometry(5, 50, 50),
+    //   new THREE.ShaderMaterial({
+    //     vertexShader: atmosphereVertexShader,
+    //     fragmentShader: atmoosphereFragmentShader,
+    //     blending: THREE.AdditiveBlending,
+    //     side: THREE.BackSide,
+    //   })
+    // );
 
-    atmosphere.scale.set(1.1, 1.1, 1.1);
+    // atmosphere.scale.set(1.1, 1.1, 1.1);
     //scene.add(atmosphere)
 
     // create moon
-    const moon = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 35, 35),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(moonTexture),
-          },
-        },
-      })
-    );
-    moon.position.set(0, 8, 0);
-    moon.rotation.set(0, 0, 0);
-    moon.scale.set(0.3, 0.3, 0.3);
+    // const moon = new THREE.Mesh(
+    //   new THREE.SphereGeometry(5, 35, 35),
+    //   new THREE.ShaderMaterial({
+    //     vertexShader,
+    //     fragmentShader,
+    //     uniforms: {
+    //       globeTexture: {
+    //         value: new THREE.TextureLoader().load(moonTexture),
+    //       },
+    //     },
+    //   })
+    // );
+    // moon.position.set(0, 8, 0);
+    // moon.rotation.set(0, 0, 0);
+    // moon.scale.set(0.3, 0.3, 0.3);
 
-    moonOrbit.add(moon);
+    // moonOrbit.add(moon);
 
-    // create mars
-    const mars = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 70, 70),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(marsTexture),
-          },
-        },
-      })
-    );
-    mars.position.y -= 20;
-    scene.add(mars);
+    camera.position.z = 15;
 
-    // create jupiter
-    const jupiter = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 70, 70),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(jupiterTexture),
-          },
-        },
-      })
-    );
-    jupiter.position.y -= 40;
-    scene.add(jupiter);
+    const mouse = {
+      x: undefined,
+      y: undefined,
+    };
 
-    // create saturn
-    const saturn = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 50, 50),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(saturnTexture),
-          },
-        },
-      })
-    );
-    saturn.position.y -= 60;
-    scene.add(saturn);
+    function animate() {
+      // moonOrbit.rotation.z += 0.002;
+      // moon.rotation.y += 0.001;
 
-    // create uranus
-    const uranus = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 50, 50),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(uranusTexture),
-          },
-        },
-      })
-    );
-    uranus.position.y -= 80;
-    scene.add(uranus);
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+      // earth.rotation.y += 0.001;
 
-    // create neptun
-    const neptun = new THREE.Mesh(
-      new THREE.SphereGeometry(5, 50, 50),
-      new THREE.ShaderMaterial({
-        vertexShader,
-        fragmentShader,
-        uniforms: {
-          globeTexture: {
-            value: new THREE.TextureLoader().load(neptuneTexture),
-          },
-        },
-      })
-    );
-    neptun.position.y -= 100;
-    scene.add(neptun);
+      // jupiter.rotation.y += 0.001;
+      // saturn.rotation.y += 0.001;
+      // mars.rotation.y += 0.001;
+      // uranus.rotation.y += 0.001;
+      // venus.rotation.y += 0.001;
+      // neptun.rotation.y += 0.001;
+      // merkur.rotation.y += 0.001;
+      //gsap.to(group.rotation, {
+      //  x: -mouse.y * 0.3,
+      //  y: mouse.x * 0.5,
+      //  duration: 2
+      //})
+    }
+    animate();
 
+    addEventListener("mousemove", (e) => {
+      mouse.x = (e.clientX / innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+    });
+  }
+
+  function createStarField(scene) {
     const starGeometry = new THREE.BufferGeometry();
     const starMaterial = new THREE.PointsMaterial({
       color: 0xffffff,
@@ -242,41 +206,6 @@
 
     const stars = new THREE.Points(starGeometry, starMaterial);
     scene.add(stars);
-
-    camera.position.z = 15;
-
-    const mouse = {
-      x: undefined,
-      y: undefined,
-    };
-
-    function animate() {
-      moonOrbit.rotation.z += 0.002;
-      moon.rotation.y += 0.001;
-
-      requestAnimationFrame(animate);
-      renderer.render(scene, camera);
-      earth.rotation.y += 0.001;
-
-      jupiter.rotation.y += 0.001;
-      saturn.rotation.y += 0.001;
-      mars.rotation.y += 0.001;
-      uranus.rotation.y += 0.001;
-      venus.rotation.y += 0.001;
-      neptun.rotation.y += 0.001;
-      merkur.rotation.y += 0.001;
-      //gsap.to(group.rotation, {
-      //  x: -mouse.y * 0.3,
-      //  y: mouse.x * 0.5,
-      //  duration: 2
-      //})
-    }
-    animate();
-
-    addEventListener("mousemove", (e) => {
-      mouse.x = (e.clientX / innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / innerHeight) * 2 + 1;
-    });
   }
 
   function togglePreviousPlanet() {
@@ -287,8 +216,9 @@
     if (targetIndex < 0) {
       targetIndex = planets.length - 1;
     }
-
+    currentPlanet.mesh.position.y = -20;
     currentPlanet = planets[targetIndex];
+    currentPlanet.mesh.position.y = 0;
   }
 
   function toggleNextPlanet() {
@@ -301,8 +231,36 @@
     if (targetIndex > lastEntryIndex) {
       targetIndex = 0;
     }
-
+    currentPlanet.mesh.position.y = 20;
     currentPlanet = planets[targetIndex];
+    currentPlanet.mesh.position.y = 0;
+  }
+
+  function togglePlanetChangeByClick(targetPlanet) {
+    if (currentPlanet === targetPlanet) return;
+    let currentPlanetIndex = 0;
+    let targetPlanetIndex = 0;
+
+    for (let i = 0; i < planets.length; i++) {
+      if (planets[i].name === currentPlanet.name) {
+        currentPlanetIndex = i;
+      }
+      if (planets[i].name === targetPlanet.name) {
+        targetPlanetIndex = i;
+      }
+    }
+
+    if (currentPlanetIndex < targetPlanetIndex) {
+      currentPlanet.mesh.position.y = -20;
+      currentPlanet = targetPlanet;
+      currentPlanet.mesh.position.y = 0;
+    }
+
+    if (currentPlanetIndex > targetPlanetIndex) {
+      currentPlanet.mesh.position.y = 20;
+      currentPlanet = targetPlanet;
+      currentPlanet.mesh.position.y = 0;
+    }
   }
 </script>
 
@@ -314,7 +272,7 @@
     <ul>
       {#each planets as data}
         <li class={currentPlanet?.name === data.name ? "selected" : ""}>
-          <button on:click={() => (currentPlanet = data)}>
+          <button on:click={() => togglePlanetChangeByClick(data)}>
             {data.name}
           </button>
         </li>
