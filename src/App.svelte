@@ -5,6 +5,7 @@
 
   // import gsap from "gsap";
   import * as THREE from "three";
+  import * as TWEEN from "@tweenjs/tween.js";
   import vertexShader from "./shaders/vertex.glsl";
   import fragmentShader from "./shaders/fragment.glsl";
 
@@ -23,6 +24,9 @@
   import venusTexture from "./assets/planets/textures/venus.jpg";
 
   import { planets } from "./assets/planets/dataSheet.json";
+
+  const tweenAnimationTime = 1500;
+  const tweenType = TWEEN.Easing.Elastic.Out;
 
   let currentPlanet;
 
@@ -161,6 +165,7 @@
       // moon.rotation.y += 0.001;
 
       requestAnimationFrame(animate);
+      TWEEN.update();
       renderer.render(scene, camera);
       // earth.rotation.y += 0.001;
 
@@ -216,9 +221,9 @@
     if (targetIndex < 0) {
       targetIndex = planets.length - 1;
     }
-    currentPlanet.mesh.position.y = -20;
+
+    movePlanetsDown(currentPlanet, planets[targetIndex]);
     currentPlanet = planets[targetIndex];
-    currentPlanet.mesh.position.y = 0;
   }
 
   function toggleNextPlanet() {
@@ -231,9 +236,9 @@
     if (targetIndex > lastEntryIndex) {
       targetIndex = 0;
     }
-    currentPlanet.mesh.position.y = 20;
+
+    movePlanetsUp(currentPlanet, planets[targetIndex]);
     currentPlanet = planets[targetIndex];
-    currentPlanet.mesh.position.y = 0;
   }
 
   function togglePlanetChangeByClick(targetPlanet) {
@@ -251,16 +256,42 @@
     }
 
     if (currentPlanetIndex < targetPlanetIndex) {
-      currentPlanet.mesh.position.y = -20;
+      movePlanetsUp(currentPlanet, targetPlanet);
       currentPlanet = targetPlanet;
-      currentPlanet.mesh.position.y = 0;
     }
 
     if (currentPlanetIndex > targetPlanetIndex) {
-      currentPlanet.mesh.position.y = 20;
+      movePlanetsDown(currentPlanet, targetPlanet);
       currentPlanet = targetPlanet;
-      currentPlanet.mesh.position.y = 0;
     }
+  }
+
+  function movePlanetsUp(centerPlanet, newCenterPlanet) {
+    newCenterPlanet.mesh.position.y = -20;
+
+    new TWEEN.Tween(centerPlanet.mesh.position)
+      .to({ y: 20 }, tweenAnimationTime)
+      .easing(tweenType)
+      .start();
+
+    new TWEEN.Tween(newCenterPlanet.mesh.position)
+      .to({ y: 0 }, tweenAnimationTime)
+      .easing(tweenType)
+      .start();
+  }
+
+  function movePlanetsDown(centerPlanet, newCenterPlanet) {
+    newCenterPlanet.mesh.position.y = 20;
+
+    new TWEEN.Tween(centerPlanet.mesh.position)
+      .to({ y: -20 }, tweenAnimationTime)
+      .easing(tweenType)
+      .start();
+
+    new TWEEN.Tween(newCenterPlanet.mesh.position)
+      .to({ y: 0 }, tweenAnimationTime)
+      .easing(tweenType)
+      .start();
   }
 </script>
 
