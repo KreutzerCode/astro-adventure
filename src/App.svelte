@@ -23,6 +23,15 @@
   import uranusTexture from "./assets/planets/textures/uranus.jpg";
   import venusTexture from "./assets/planets/textures/venus.jpg";
 
+  import earthIcon from "./assets/planets/icons/earth.png";
+  import jupiterIcon from "./assets/planets/icons/jupiter.png";
+  import marsIcon from "./assets/planets/icons/mars.png";
+  import mercuryIcon from "./assets/planets/icons/mercury.png";
+  import neptuneIcon from "./assets/planets/icons/neptune.png";
+  import saturnIcon from "./assets/planets/icons/saturn.png";
+  import uranusIcon from "./assets/planets/icons/uranus.png";
+  import venusIcon from "./assets/planets/icons/venus.png";
+
   import { planets } from "./assets/planets/dataSheet.json";
 
   const tweenAnimationTime = 1500;
@@ -31,8 +40,43 @@
   let currentPlanet;
 
   onMount(() => {
+    planets.map((planet) => {
+      if (planet.name === "Earth") {
+        planet.texture = earthTexture;
+        planet.icon = earthIcon;
+      }
+      if (planet.name === "Jupiter") {
+        planet.texture = jupiterTexture;
+        planet.icon = jupiterIcon;
+      }
+      if (planet.name === "Mars") {
+        planet.texture = marsTexture;
+        planet.icon = marsIcon;
+      }
+      if (planet.name === "Mercury") {
+        planet.texture = mercuryTexture;
+        planet.icon = mercuryIcon;
+      }
+      if (planet.name === "Neptune") {
+        planet.texture = neptuneTexture;
+        planet.icon = neptuneIcon;
+      }
+      if (planet.name === "Saturn") {
+        planet.texture = saturnTexture;
+        planet.icon = saturnIcon;
+      }
+      if (planet.name === "Uranus") {
+        planet.texture = uranusTexture;
+        planet.icon = uranusIcon;
+      }
+      if (planet.name === "Venus") {
+        planet.texture = venusTexture;
+        planet.icon = venusIcon;
+      }
+    });
     createPlanetScene();
     currentPlanet = planets.find((planet) => planet.name === "Earth");
+    planets = planets;
   });
 
   function createPlanetScene() {
@@ -55,35 +99,6 @@
     createStarField(scene);
 
     planets.forEach((planet) => {
-      let targetTexture;
-
-      switch (planet.name) {
-        case "Earth":
-          targetTexture = earthTexture;
-          break;
-        case "Jupiter":
-          targetTexture = jupiterTexture;
-          break;
-        case "Mars":
-          targetTexture = marsTexture;
-          break;
-        case "Mercury":
-          targetTexture = mercuryTexture;
-          break;
-        case "Neptune":
-          targetTexture = neptuneTexture;
-          break;
-        case "Saturn":
-          targetTexture = saturnTexture;
-          break;
-        case "Uranus":
-          targetTexture = uranusTexture;
-          break;
-        case "Venus":
-          targetTexture = venusTexture;
-          break;
-      }
-
       planet.mesh = new THREE.Mesh(
         new THREE.SphereGeometry(5, 50, 50),
         new THREE.ShaderMaterial({
@@ -91,7 +106,7 @@
           fragmentShader,
           uniforms: {
             globeTexture: {
-              value: new THREE.TextureLoader().load(targetTexture),
+              value: new THREE.TextureLoader().load(planet.texture),
             },
           },
         })
@@ -301,10 +316,10 @@
       <i class="fa-solid fa-chevron-up" />
     </button>
     <ul>
-      {#each planets as data}
-        <li class={currentPlanet?.name === data.name ? "selected" : ""}>
-          <button on:click={() => togglePlanetChangeByClick(data)}>
-            {data.name}
+      {#each planets as planet}
+        <li class={currentPlanet?.name === planet.name ? "selected" : ""}>
+          <button on:click={() => togglePlanetChangeByClick(planet)}>
+            <img src={planet.icon} alt={planet.name} />
           </button>
         </li>
       {/each}
@@ -361,8 +376,15 @@
           button {
             width: 50px;
             height: 50px;
-            background-color: green;
             border-radius: 25px;
+            margin: 0;
+            padding: 0;
+
+            img {
+              width: 50px;
+              height: 50px;
+              border-radius: 25px;
+            }
           }
 
           &.selected {
