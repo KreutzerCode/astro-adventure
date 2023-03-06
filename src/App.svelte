@@ -32,11 +32,11 @@
   import uranusIcon from "./assets/planets/icons/uranus.png";
   import venusIcon from "./assets/planets/icons/venus.png";
 
-  import { planets } from "./assets/planets/dataSheet.json";
+  import { planetsData } from "./assets/planets/dataSheet.json";
 
   const tweenAnimationTime = 1500;
   const tweenType = TWEEN.Easing.Elastic.Out;
-
+  let planets = [...planetsData];
   let currentPlanet;
 
   onMount(() => {
