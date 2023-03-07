@@ -238,7 +238,7 @@
     }
 
     movePlanetsDown(currentPlanet, planets[targetIndex]);
-    currentPlanet = planets[targetIndex];
+    changeTextWall(planets[targetIndex]);
   }
 
   function toggleNextPlanet() {
@@ -253,7 +253,7 @@
     }
 
     movePlanetsUp(currentPlanet, planets[targetIndex]);
-    currentPlanet = planets[targetIndex];
+    changeTextWall(planets[targetIndex]);
   }
 
   function togglePlanetChangeByClick(targetPlanet) {
@@ -270,15 +270,13 @@
       }
     }
 
-    if (currentPlanetIndex < targetPlanetIndex) {
-      movePlanetsUp(currentPlanet, targetPlanet);
-      currentPlanet = targetPlanet;
-    }
-
     if (currentPlanetIndex > targetPlanetIndex) {
       movePlanetsDown(currentPlanet, targetPlanet);
-      currentPlanet = targetPlanet;
+    }else {
+      movePlanetsUp(currentPlanet, targetPlanet);
     }
+
+    changeTextWall(targetPlanet)
   }
 
   function movePlanetsUp(centerPlanet, newCenterPlanet) {
@@ -307,6 +305,19 @@
       .to({ y: 0 }, tweenAnimationTime)
       .easing(tweenType)
       .start();
+  }
+
+  function changeTextWall(targetPlanet) {
+    const textWall = document.querySelector(".text-wall");
+    textWall.style.opacity = "0";
+    textWall.addEventListener(
+      "transitionend",
+      () => {
+        currentPlanet = targetPlanet;
+        textWall.style.opacity = "1";
+      },
+      { once: true }
+    );
   }
 </script>
 
@@ -400,6 +411,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      opacity: 1;
+      transition: opacity 0.15s ease-in-out;
 
       h1 {
         margin: 20px;
