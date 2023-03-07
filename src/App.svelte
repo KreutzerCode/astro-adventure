@@ -176,21 +176,13 @@
     };
 
     function animate() {
-      // moonOrbit.rotation.z += 0.002;
-      // moon.rotation.y += 0.001;
-
       requestAnimationFrame(animate);
       TWEEN.update();
       renderer.render(scene, camera);
-      // earth.rotation.y += 0.001;
+      if(currentPlanet) currentPlanet.mesh.rotation.y += 0.001
+      // moonOrbit.rotation.z += 0.002;
+      // moon.rotation.y += 0.001;
 
-      // jupiter.rotation.y += 0.001;
-      // saturn.rotation.y += 0.001;
-      // mars.rotation.y += 0.001;
-      // uranus.rotation.y += 0.001;
-      // venus.rotation.y += 0.001;
-      // neptun.rotation.y += 0.001;
-      // merkur.rotation.y += 0.001;
       //gsap.to(group.rotation, {
       //  x: -mouse.y * 0.3,
       //  y: mouse.x * 0.5,
@@ -272,11 +264,11 @@
 
     if (currentPlanetIndex > targetPlanetIndex) {
       movePlanetsDown(currentPlanet, targetPlanet);
-    }else {
+    } else {
       movePlanetsUp(currentPlanet, targetPlanet);
     }
 
-    changeTextWall(targetPlanet)
+    changeTextWall(targetPlanet);
   }
 
   function movePlanetsUp(centerPlanet, newCenterPlanet) {
