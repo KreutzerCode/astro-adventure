@@ -135,7 +135,7 @@
     //scene.add(atmosphere)
 
     let planetRotationSnapshot;
-    let mouseControll = false;
+    let mouseControl = false;
     const mousePosition = {
       x: undefined,
       y: undefined,
@@ -143,9 +143,9 @@
 
     canvasContainer.addEventListener("mouseover", () => {
       planetRotationSnapshot = currentPlanet.mesh.rotation.y;
-      mouseControll = true;
+      mouseControl = true;
     });
-    canvasContainer.addEventListener("mouseout", () => mouseControll = false);
+    canvasContainer.addEventListener("mouseout", () => (mouseControl = false));
     canvasContainer.addEventListener("mousemove", (e) => {
       mousePosition.x = (e.clientX / innerWidth) * 2 - 1;
       mousePosition.y = -(e.clientY / innerHeight) * 2 + 1;
@@ -163,10 +163,10 @@
         currentPlanet.mesh.rotation.y = 0.001;
       }
 
-      if (mouseControll) {
+      if (mouseControl) {
         gsap.to(currentPlanet?.mesh.rotation, {
           x: -mousePosition.y * 0.3,
-          y: planetRotationSnapshot + (mousePosition.x * 0.5),
+          y: planetRotationSnapshot + mousePosition.x * 0.5,
           duration: 2,
         });
       }
@@ -353,13 +353,17 @@
           justify-content: center;
           align-items: center;
           border: solid 2px black;
+          position: relative;
 
           button {
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0;
 
             img {
               width: 50px;
@@ -369,7 +373,9 @@
           }
 
           &.selected {
-            border: solid 2px red;
+            button img {
+              box-shadow: 0 0 50px rgba(255, 255, 255, 0.9);
+            }
           }
         }
       }
@@ -404,6 +410,7 @@
     }
 
     .planet-preview {
+      display: flex;
       flex: 4;
     }
   }
