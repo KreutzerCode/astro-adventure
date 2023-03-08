@@ -3,7 +3,7 @@
   import svelteLogo from "./assets/svelte.svg";
   import Counter from "./lib/Counter.svelte";
 
-  // import gsap from "gsap";
+  import gsap from "gsap";
   import * as THREE from "three";
   import * as TWEEN from "@tweenjs/tween.js";
   import vertexShader from "./shaders/vertex.glsl";
@@ -88,7 +88,7 @@
       0.1,
       1000
     );
-
+    camera.position.z = 15;
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       canvas: document.querySelector("canvas"),
@@ -120,21 +120,6 @@
       scene.add(planet.mesh);
     });
 
-    //Moon Orbit
-    //todo transparent
-    // const moonOrbit = new THREE.Mesh(
-    //   new THREE.SphereGeometry(5, 35, 35),
-    //   new THREE.MeshBasicMaterial()
-    // );
-    // //moonOrbit.rotation.set(0,4,0);
-    // moonOrbit.rotation.set(1, 4, 0);
-    // moonOrbit.scale.set(0.9, 0.9, 0.9);
-
-    // const group = new THREE.Group();
-    // group.add(moonOrbit);
-    // group.add(earth);
-    // scene.add(group);
-
     // create atmosphere
     // const atmosphere = new THREE.Mesh(
     //   new THREE.SphereGeometry(5, 50, 50),
@@ -149,52 +134,44 @@
     // atmosphere.scale.set(1.1, 1.1, 1.1);
     //scene.add(atmosphere)
 
-    // create moon
-    // const moon = new THREE.Mesh(
-    //   new THREE.SphereGeometry(5, 35, 35),
-    //   new THREE.ShaderMaterial({
-    //     vertexShader,
-    //     fragmentShader,
-    //     uniforms: {
-    //       globeTexture: {
-    //         value: new THREE.TextureLoader().load(moonTexture),
-    //       },
-    //     },
-    //   })
-    // );
-    // moon.position.set(0, 8, 0);
-    // moon.rotation.set(0, 0, 0);
-    // moon.scale.set(0.3, 0.3, 0.3);
-
-    // moonOrbit.add(moon);
-
-    camera.position.z = 15;
-
-    const mouse = {
+    let planetRotationSnapshot;
+    let mouseControll = false;
+    const mousePosition = {
       x: undefined,
       y: undefined,
     };
+
+    canvasContainer.addEventListener("mouseover", () => {
+      planetRotationSnapshot = currentPlanet.mesh.rotation.y;
+      mouseControll = true;
+    });
+    canvasContainer.addEventListener("mouseout", () => mouseControll = false);
+    canvasContainer.addEventListener("mousemove", (e) => {
+      mousePosition.x = (e.clientX / innerWidth) * 2 - 1;
+      mousePosition.y = -(e.clientY / innerHeight) * 2 + 1;
+    });
 
     function animate() {
       requestAnimationFrame(animate);
       TWEEN.update();
       renderer.render(scene, camera);
-      if(currentPlanet) currentPlanet.mesh.rotation.y += 0.001
-      // moonOrbit.rotation.z += 0.002;
-      // moon.rotation.y += 0.001;
 
-      //gsap.to(group.rotation, {
-      //  x: -mouse.y * 0.3,
-      //  y: mouse.x * 0.5,
-      //  duration: 2
-      //})
+      if (currentPlanet) currentPlanet.mesh.rotation.y += 0.001;
+
+      //reset rotate value after one rotation
+      if (Math.abs(currentPlanet?.mesh.rotation.y) >= Math.PI * 2) {
+        currentPlanet.mesh.rotation.y = 0.001;
+      }
+
+      if (mouseControll) {
+        gsap.to(currentPlanet?.mesh.rotation, {
+          x: -mousePosition.y * 0.3,
+          y: planetRotationSnapshot + (mousePosition.x * 0.5),
+          duration: 2,
+        });
+      }
     }
     animate();
-
-    addEventListener("mousemove", (e) => {
-      mouse.x = (e.clientX / innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / innerHeight) * 2 + 1;
-    });
   }
 
   function createStarField(scene) {
@@ -375,6 +352,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          border: solid 2px black;
 
           button {
             width: 50px;
