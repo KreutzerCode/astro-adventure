@@ -310,7 +310,7 @@
     <h1>{currentPlanet?.name}</h1>
     <p class="info-text">{currentPlanet?.text}</p>
     <p class="fun-fact-label">fun fact:</p>
-    <p class="fun-fact">{currentPlanet?.text}</p>
+    <p class="fun-fact">{currentPlanet?.funFact}</p>
   </div>
   <div class="planet-preview" id="canvas-container">
     <canvas />
