@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-
   import gsap from "gsap";
   import * as THREE from "three";
   import * as TWEEN from "@tweenjs/tween.js";
@@ -31,44 +30,44 @@
 
   const tweenAnimationTime = 1500;
   const tweenType = TWEEN.Easing.Elastic.Out;
-  let planets = [...planetsData];
   let currentPlanet;
+  let planets = [...planetsData];
+  planets.map((planet) => {
+    if (planet.name === "Earth") {
+      planet.texture = earthTexture;
+      planet.icon = earthIcon;
+    }
+    if (planet.name === "Jupiter") {
+      planet.texture = jupiterTexture;
+      planet.icon = jupiterIcon;
+    }
+    if (planet.name === "Mars") {
+      planet.texture = marsTexture;
+      planet.icon = marsIcon;
+    }
+    if (planet.name === "Mercury") {
+      planet.texture = mercuryTexture;
+      planet.icon = mercuryIcon;
+    }
+    if (planet.name === "Neptune") {
+      planet.texture = neptuneTexture;
+      planet.icon = neptuneIcon;
+    }
+    if (planet.name === "Saturn") {
+      planet.texture = saturnTexture;
+      planet.icon = saturnIcon;
+    }
+    if (planet.name === "Uranus") {
+      planet.texture = uranusTexture;
+      planet.icon = uranusIcon;
+    }
+    if (planet.name === "Venus") {
+      planet.texture = venusTexture;
+      planet.icon = venusIcon;
+    }
+  });
 
   onMount(() => {
-    planets.map((planet) => {
-      if (planet.name === "Earth") {
-        planet.texture = earthTexture;
-        planet.icon = earthIcon;
-      }
-      if (planet.name === "Jupiter") {
-        planet.texture = jupiterTexture;
-        planet.icon = jupiterIcon;
-      }
-      if (planet.name === "Mars") {
-        planet.texture = marsTexture;
-        planet.icon = marsIcon;
-      }
-      if (planet.name === "Mercury") {
-        planet.texture = mercuryTexture;
-        planet.icon = mercuryIcon;
-      }
-      if (planet.name === "Neptune") {
-        planet.texture = neptuneTexture;
-        planet.icon = neptuneIcon;
-      }
-      if (planet.name === "Saturn") {
-        planet.texture = saturnTexture;
-        planet.icon = saturnIcon;
-      }
-      if (planet.name === "Uranus") {
-        planet.texture = uranusTexture;
-        planet.icon = uranusIcon;
-      }
-      if (planet.name === "Venus") {
-        planet.texture = venusTexture;
-        planet.icon = venusIcon;
-      }
-    });
     createPlanetScene();
     currentPlanet = planets.find((planet) => planet.name === "Earth");
     planets = planets;
@@ -102,7 +101,6 @@
         })
       );
 
-      // create atmosphere
       const atmosphere = new THREE.Mesh(
         new THREE.SphereGeometry(5, 50, 50),
         new THREE.ShaderMaterial({
@@ -353,7 +351,6 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          border: solid 2px black;
           position: relative;
           flex-direction: column;
 
