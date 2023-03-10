@@ -13,10 +13,8 @@
   import jupiterTexture from "./assets/planets/textures/jupiter.jpg";
   import marsTexture from "./assets/planets/textures/mars.jpg";
   import mercuryTexture from "./assets/planets/textures/mercury.jpg";
-  import moonTexture from "./assets/planets/textures/moon.jpg";
   import neptuneTexture from "./assets/planets/textures/neptune.jpg";
   import saturnTexture from "./assets/planets/textures/saturn.jpg";
-  import sunTexture from "./assets/planets/textures/sun.jpg";
   import uranusTexture from "./assets/planets/textures/uranus.jpg";
   import venusTexture from "./assets/planets/textures/venus.jpg";
 
@@ -79,19 +77,14 @@
   function createPlanetScene() {
     const canvasContainer = document.querySelector("#canvas-container");
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      canvasContainer.offsetWidth / canvasContainer.offsetHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 15;
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      canvas: document.querySelector("canvas"),
-    });
-    renderer.setSize(canvasContainer.offsetWidth, canvasContainer.offsetHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    const camera = createCamera(canvasContainer);
+    const renderer = createRenderer(canvasContainer);
+    let planetRotationSnapshot;
+    let mouseControl = false;
+    const mousePosition = {
+      x: undefined,
+      y: undefined,
+    };
 
     createStarField(scene);
 
@@ -131,13 +124,6 @@
       scene.add(planet.mesh);
     });
 
-    let planetRotationSnapshot;
-    let mouseControl = false;
-    const mousePosition = {
-      x: undefined,
-      y: undefined,
-    };
-
     canvasContainer.addEventListener("mouseover", () => {
       planetRotationSnapshot = currentPlanet.mesh.rotation.y;
       mouseControl = true;
@@ -150,8 +136,8 @@
 
     function animate() {
       requestAnimationFrame(animate);
-      TWEEN.update();
       renderer.render(scene, camera);
+      TWEEN.update();
 
       if (currentPlanet) currentPlanet.mesh.rotation.y += 0.001;
 
@@ -164,6 +150,28 @@
       }
     }
     animate();
+  }
+
+  function createCamera(target) {
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      target.offsetWidth / target.offsetHeight,
+      0.1,
+      1000
+    );
+    camera.position.z = 15;
+    return camera;
+  }
+
+  function createRenderer(container) {
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      canvas: container.querySelector("canvas"),
+    });
+    renderer.setSize(container.offsetWidth, container.offsetHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    return renderer;
   }
 
   function createStarField(scene) {
@@ -293,6 +301,7 @@
           <button on:click={() => togglePlanetChangeByClick(planet)}>
             <img src={planet.icon} alt={planet.name} />
           </button>
+          <p>{planet.name}</p>
         </li>
       {/each}
     </ul>
@@ -346,6 +355,7 @@
           align-items: center;
           border: solid 2px black;
           position: relative;
+          flex-direction: column;
 
           button {
             width: 100%;
@@ -355,13 +365,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 5px 0;
+            padding-top: 5px;
 
             img {
               width: 50px;
               height: 50px;
               border-radius: 25px;
             }
+          }
+
+          p {
+            margin: 0;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.8s;
+            transition-delay: 0.4s;
+          }
+
+          &:hover p {
+            opacity: 1;
           }
 
           &.selected {
