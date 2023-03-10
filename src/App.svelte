@@ -6,7 +6,6 @@
   import * as TWEEN from "@tweenjs/tween.js";
   import vertexShader from "./shaders/vertex.glsl";
   import fragmentShader from "./shaders/fragment.glsl";
-
   import atmosphereVertexShader from "./shaders/atmosphereVertex.glsl";
   import atmoosphereFragmentShader from "./shaders/atmosphereFragment.glsl";
 
@@ -110,6 +109,20 @@
         })
       );
 
+      // create atmosphere
+      const atmosphere = new THREE.Mesh(
+        new THREE.SphereGeometry(5, 50, 50),
+        new THREE.ShaderMaterial({
+          vertexShader: atmosphereVertexShader,
+          fragmentShader: atmoosphereFragmentShader,
+          blending: THREE.AdditiveBlending,
+          side: THREE.BackSide,
+        })
+      );
+
+      atmosphere.scale.set(1.1, 1.1, 1.1);
+      planet.mesh.add(atmosphere);
+
       //Earth is default
       if (planet.name != "Earth") {
         planet.mesh.position.y += 20;
@@ -117,20 +130,6 @@
 
       scene.add(planet.mesh);
     });
-
-    // create atmosphere
-    // const atmosphere = new THREE.Mesh(
-    //   new THREE.SphereGeometry(5, 50, 50),
-    //   new THREE.ShaderMaterial({
-    //     vertexShader: atmosphereVertexShader,
-    //     fragmentShader: atmoosphereFragmentShader,
-    //     blending: THREE.AdditiveBlending,
-    //     side: THREE.BackSide,
-    //   })
-    // );
-
-    // atmosphere.scale.set(1.1, 1.1, 1.1);
-    //scene.add(atmosphere)
 
     let planetRotationSnapshot;
     let mouseControl = false;
@@ -155,11 +154,6 @@
       renderer.render(scene, camera);
 
       if (currentPlanet) currentPlanet.mesh.rotation.y += 0.001;
-
-      //reset rotate value after one rotation
-      if (Math.abs(currentPlanet?.mesh.rotation.y) >= Math.PI * 2) {
-        currentPlanet.mesh.rotation.y = 0.001;
-      }
 
       if (mouseControl) {
         gsap.to(currentPlanet?.mesh.rotation, {
