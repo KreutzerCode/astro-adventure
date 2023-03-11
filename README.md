@@ -28,7 +28,6 @@ Feel free to contribute any type of contribution is welcome.
 
 ## ✅ Todo
 
-* fix chrome canvas calculation
 * more fun texts
 * moon for the earth
 * rings for saturn

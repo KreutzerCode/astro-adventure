@@ -1,14 +1,19 @@
 {
     "planetsData": [
         {
+            "name": "Mercury",
+            "text": "Mercury is the smallest planet in the Solar System, named after the Roman god Mercurius. It has a short orbit of 87.97 Earth days and can only be seen near the horizon at twilight, showing phases similar to Venus and the Moon.",
+            "funFact": "Despite being the closest planet to the Sun, Mercury is not the hottest planet in the Solar System. That title goes to Venus, which has a thick atmosphere that traps heat, making it hotter than Mercury."
+        },
+        {
+            "name": "Venus",
+            "text": "Venus, named after the Roman goddess of love and beauty, is the second planet from the Sun and the brightest natural object in Earth's night sky after the Moon. Its synodic day length is 117 Earth days, it rotates in the opposite direction to most planets, and it has no moons.",
+            "funFact": "Venus has the longest rotation period of any planet in the Solar System, taking 243 Earth days to complete a single rotation. Additionally, Venus rotates in the opposite direction to most planets, with the Sun rising in the west and setting in the east."
+        },
+        {
             "name": "Earth",
             "text": "Earth is the third planet from the Sun and the only known planet with life. It has a solid iron inner core, a liquid outer core that generates its magnetic field, and a convective mantle that drives plate tectonics.",
             "funFact": "The Earth is the only planet known to have liquid water on its surface, which is essential for life as we know it."
-        },
-        {
-            "name": "Jupiter",
-            "text": "Jupiter is the largest planet in the Solar System, fifth from the Sun, and is named after the Roman king of the gods. With a mass more than two and a half times that of all other planets combined, it is also the third-brightest natural object in the Earth's night sky.",
-            "funFact": "Jupiter has at least 79 moons, the four largest of which are called the Galilean moons and were first observed by Galileo Galilei in 1610."
         },
         {
             "name": "Mars",
@@ -16,14 +21,9 @@
             "funFact": "Mars is home to the tallest mountain in the solar system, Olympus Mons, which is three times the height of Mount Everest!"
         },
         {
-            "name": "Mercury",
-            "text": "Mercury is the smallest planet in the Solar System, named after the Roman god Mercurius. It has a short orbit of 87.97 Earth days and can only be seen near the horizon at twilight, showing phases similar to Venus and the Moon.",
-            "funFact": "Despite being the closest planet to the Sun, Mercury is not the hottest planet in the Solar System. That title goes to Venus, which has a thick atmosphere that traps heat, making it hotter than Mercury."
-        },
-        {
-            "name": "Neptune",
-            "text": "Neptune is the farthest-known Solar planet from the Sun, and it is the fourth-largest and third-most-massive planet in the Solar System. It is named after the Roman god of the sea, and it has a symbol ♆ that represents the god Neptune's trident.",
-            "funFact": "Neptune is the only planet in the Solar System that was discovered through mathematical prediction rather than empirical observation. Its discovery was the result of irregularities observed in the orbit of Uranus, which led astronomers to predict the existence of an eighth planet."
+            "name": "Jupiter",
+            "text": "Jupiter is the largest planet in the Solar System, fifth from the Sun, and is named after the Roman king of the gods. With a mass more than two and a half times that of all other planets combined, it is also the third-brightest natural object in the Earth's night sky.",
+            "funFact": "Jupiter has at least 79 moons, the four largest of which are called the Galilean moons and were first observed by Galileo Galilei in 1610."
         },
         {
             "name": "Saturn",
@@ -36,9 +36,9 @@
             "funFact": "Uranus is the only planet in the solar system whose equator is nearly at a right angle to its orbit, meaning it essentially orbits on its side. This gives it a very unique appearance and rotation."
         },
         {
-            "name": "Venus",
-            "text": "Venus, named after the Roman goddess of love and beauty, is the second planet from the Sun and the brightest natural object in Earth's night sky after the Moon. Its synodic day length is 117 Earth days, it rotates in the opposite direction to most planets, and it has no moons.",
-            "funFact": "Venus has the longest rotation period of any planet in the Solar System, taking 243 Earth days to complete a single rotation. Additionally, Venus rotates in the opposite direction to most planets, with the Sun rising in the west and setting in the east."
+            "name": "Neptune",
+            "text": "Neptune is the farthest-known Solar planet from the Sun, and it is the fourth-largest and third-most-massive planet in the Solar System. It is named after the Roman god of the sea, and it has a symbol ♆ that represents the god Neptune's trident.",
+            "funFact": "Neptune is the only planet in the Solar System that was discovered through mathematical prediction rather than empirical observation. Its discovery was the result of irregularities observed in the orbit of Uranus, which led astronomers to predict the existence of an eighth planet."
         }
     ]
 }
