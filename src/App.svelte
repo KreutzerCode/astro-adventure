@@ -336,6 +336,7 @@
         font-size: 40px;
         cursor: pointer;
         background-color: transparent;
+        color: white;
       }
 
       ul {
@@ -421,8 +422,8 @@
     }
 
     .planet-preview {
-      display: flex;
       flex: 4;
+      overflow: hidden;
     }
   }
 </style>
