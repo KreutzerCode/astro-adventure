@@ -33,14 +33,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-pages-artifact@v1
         with:
-          # Upload only the /dist folder
-          name: dist
-          path: dist/
+          # Upload entire repository
+          path: 'dist/'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.ASTRO_SECRET }}
-          publish_dir: ./dist
+        uses: actions/deploy-pages@v1
