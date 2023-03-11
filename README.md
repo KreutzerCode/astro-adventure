@@ -12,15 +12,15 @@ The objective of this project is to integrate the technology stack of vite + sve
 
 ## ✨ Contributing
 
-Feel free to contribute any type of contribution is welcome.
+Feel free to contribute, any type of contribution is welcome.
 
 ### Development
-* To start modifying the project, you will need to run `npm install` in the package folder.
+* To start modifying the project, you will need to run `npm install` in the project folder.
 * While modifing the project files, you can have to use `npm run dev` to apply changes.
 
 ### Production
-* When your changes are ready to be used in production, you need to run `npm run build`.
-* After that, the modified package is ready for use. Pull Requests of any kind are strongly encouraged!
+* When your changes are ready to be used, you need to run `npm run build`.
+* After that, the modified project is ready for use. Pull Requests of any kind are strongly encouraged!
 
 ## 👨🏽‍💻 Recommended IDE Setup
 
@@ -28,8 +28,8 @@ Feel free to contribute any type of contribution is welcome.
 
 ## ✅ Todo
 
-* more fun texts
-* moon for the earth
-* rings for saturn
+* add more fun texts
+* create moon for the earth
+* add ring for saturn
 * replace gsap with tween or the other way around
 * fix gsap animation when mouse moves in from the right (planet spins fast)
