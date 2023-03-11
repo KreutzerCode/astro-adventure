@@ -1,7 +1,8 @@
 {
   "name": "astro-adventure",
+  "description": "Experience a 3D representation of the planets in our solar system",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
