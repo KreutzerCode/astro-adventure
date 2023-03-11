@@ -1,14 +1,16 @@
 <div style="display:flex;align-items:center;font-size:50px;margin-bottom:20px">
     <img src="./public/vite.svg" alt="Alt Text" width="100">
-    +
+    <img src="./public/plus.svg" alt="Alt Text" width="90">
     <img src="./public/svelte.svg" alt="Alt Text" width="90">
-    +
+    <img src="./public/plus.svg" alt="Alt Text" width="90">
     <img src="./public/three.svg" alt="Alt Text" width="110">
 </div>
 
 # Astro Adventure
 
 The objective of this project is to integrate the technology stack of vite + svelte with threejs. By doing so, you can experience a 3D representation of the planets in our solar system and read interesting information about each planet you're viewing. 🚀
+
+[VIEW DEMO HERE](https://kreutzercode.github.io/astro-adventure/)
 
 ## ✨ Contributing
 
