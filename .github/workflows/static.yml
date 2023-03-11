@@ -32,8 +32,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Build
-        run: npm run build # run your build process to generate /dist folder
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
