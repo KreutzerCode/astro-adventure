@@ -4,5 +4,6 @@ import vitePluginString from 'vite-plugin-string'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte(),vitePluginString()],
+  plugins: [svelte(), vitePluginString()],
+  base: './'
 })
