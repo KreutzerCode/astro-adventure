@@ -7,8 +7,7 @@
 </div>
 
 [![dependencies Status](http://193.23.127.250:3002/gh/KreutzerCode/astro-adventure.svg)](http://193.23.127.250:3000/KreutzerCode/astro-adventure)
-[![dependencies Status](http://193.23.127.250:3002/gh/request/request.svg)](http://193.23.127.250:3000/request/request)
-# Astro Adventure
+[![dependencies Status](http://193.23.127.250:3002/gh/KreutzerCode/astro-adventure.svg?type=dev)](http://193.23.127.250:3000/KreutzerCode/astro-adventure)
 
 The objective of this project is to integrate the technology stack of vite + svelte with threejs. By doing so, you can experience a 3D representation of the planets in our solar system and read interesting information about each planet you're viewing. 🚀
 
