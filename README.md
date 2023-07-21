@@ -6,8 +6,8 @@
     <img src="./public/three.svg" alt="Alt Text" width="110">
 </div>
 
-[![dependencies Status](http://193.23.127.250:3002/gh/KreutzerCode/astro-adventure.svg)](http://193.23.127.250:3000/KreutzerCode/astro-adventure)
-[![dependencies Status](http://193.23.127.250:3002/gh/KreutzerCode/astro-adventure.svg?type=dev)](http://193.23.127.250:3000/KreutzerCode/astro-adventure)
+[![dependencies Status](https://status.atlas-dm.com/gh/kreutzerCode/astro-adventure.svg)](https://atlas-dm.com/kreutzerCode/astro-adventure)
+[![dependencies Status](https://status.atlas-dm.com/gh/kreutzerCode/astro-adventure.svg?type=dev)](https://atlas-dm.com/kreutzerCode/astro-adventure?type=dev)
 
 The objective of this project is to integrate the technology stack of vite + svelte with threejs. By doing so, you can experience a 3D representation of the planets in our solar system and read interesting information about each planet you're viewing. 🚀
 
